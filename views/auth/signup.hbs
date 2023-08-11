@@ -1,6 +1,6 @@
 <div>
 <h1>Sign up here</h1>
-{{!-- 
+
 <form action="/auth/signup" method="post">
 <label for="username">Username</label>
 <input type="text" name="username">
@@ -12,6 +12,10 @@
 <input type="text" name="email">
 <br>
 <button type="submit" class="signup-button">Sign up</button>
-</form> --}}
+
+{{#if this.errorMessage}}
+<p>{{this.errorMessage}}</p>
+{{/if}}
+</form>
 
 </div>
