@@ -19,13 +19,18 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true
-    }
-  },
-  {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
-    timestamps: true
-  }
-);
+    }, 
+    photoUrl: {
+      type: String,
+    },
+    role: {
+      type: String,
+      enum: ["user", "admin"], 
+      default: "user"
+    },
+  })
+
+  
 
 const User = model("User", userSchema);
 
