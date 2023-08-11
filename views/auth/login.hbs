@@ -1,17 +1,19 @@
 <div>
 <h1>Log in here</h1>
 
-<form action="">
+<form action="/auth/login" method="post">
 <label for="username">Username</label>
 <input type="text" name="username">
 <br>
 <label for="password">Password</label>
 <input type="text" name="password">
 <br>
-<label for="email">Email</label>
-<input type="text" name="email">
-<br>
+
 <button type="submit" class="login-button">Log in</button>
+
+{{#if this.errorMessage}}
+<p>{{this.errorMessage}}</p>
+{{/if}}
 </form>
 
 </div>

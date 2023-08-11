@@ -9,10 +9,13 @@ router.get("/", (req, res, next) => {
 });
 
 
+router.get("/main-page", (req,res,next)=>{
+  res.render ("main-page.hbs")
+})
 const authRouter = require("./auth.routes.js")
 router.use("/auth", authRouter)
 
-// const userRouter = require ("./user.routes.js")
-// router.use("/user", userRouter)
+const userRouter = require ("./user.routes.js")
+router.use("/user", userRouter)
 
 module.exports = router;
