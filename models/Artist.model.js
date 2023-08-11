@@ -18,10 +18,6 @@ const artistSchema = new Schema(
         type: String,
         required: true
     },
-    collection:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Collection"
-    }]
 }
 
 

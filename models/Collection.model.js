@@ -11,10 +11,10 @@ const collectionSchema = new Schema(
             type: String,
             required: true
         },
-        artist:{
-            type: [String],
-            required: true,
-        },
+        artist:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Artist",
+        }],
         info: String
         
     }
