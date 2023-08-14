@@ -1,23 +1,28 @@
 <div>
 <h2>Edit an artist</h2>
 
-<form action="">
+<form action="/artist/{{this.oneArtist._id}}/update" method="post" enctype="multipart/form-data">
 
     <label for="name">Name:</label>
-    <input type="text" name="name">
+    <input type="text" name="name" value="{{this.oneArtist.name}}">
     <br>
     <label for="yearBorn">Born in: </label>
-    <input type="text" name="yearBorn">
+    <input type="text" name="yearBorn" value="{{this.oneArtist.yearBorn}}">
     <br>
     <label for="description">Short description: </label>
-    <input type="text" name="description">
+    <input type="text" name="description" value="{{this.oneArtist.description}}">
     <br>
-    <form action="">
+  <label for="photo">Photo: </label>
+    <input type="file" name="photo" value="{{this.oneArtist.photo}}">
+    
+    {{!-- <form action="">
     <label for="photo">Photo: </label>
-    <input type="file" name="photo">
+    <input type="file" name="photo" value="{{this.oneArtist.photo}}">
     <button class="add-photo">Add this photo</button>
-    </form>
+    </form> --}}
     <br>
+
+    <img src="{{oneArtist.photo}}" alt="profile-photo" width="100px">
 
 <button class="btn-edit-artist">Update this artist</button>
 </form>

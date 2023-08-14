@@ -31,7 +31,6 @@ try {
 
     const oneArtist=
     await Artist.findById(artistId)
-    .select ({name: 1, yearBorn:1, description:1})
     res.render ("artist/artist-info.hbs", {
         oneArtist: oneArtist
     })
@@ -48,14 +47,15 @@ router.get ("/new-artist", async (req, res, next) =>{
   res.render ("admin/new-artist.hbs")
 })
 
-router.post ("/new-artist", async (req, res, next) =>{
+router.post ("/new-artist",uploader.single("photo"), async (req, res, next) =>{
     try {
         
      console.log ("body new artist", req.body)
     Artist.create ({
         name: req.body.name,
         yearBorn: req.body.yearBorn,
-        description: req.body.description
+        description: req.body.description,
+        photo : req.file.path
     })
     res.redirect("/artist/all-artists")
 
@@ -64,15 +64,52 @@ router.post ("/new-artist", async (req, res, next) =>{
     }
 })
 
-router.post("/upload-artist-pic", uploader.single("photo"), async (req,res,next)=>{
- try {
-    Artist.create({
-        photo: req.file.path
-    })
-    res.redirect ("/artist/new-artist")
- } catch (error) {
-    next (error)
- }
+
+
+router.get("/:artistId/update", async (req,res,next)=>{
+    try{
+
+        const response = await Artist.findById(req.params.artistId)
+        console.log(response);
+
+res.render("admin/edit-artist.hbs",{
+    oneArtist: response,
+})
+
+    }catch(error){
+next(error)
+    }
+})
+
+router.post("/:artistId/update", async (req,res,next)=>{
+
+try {
+    
+  const {name, description, yearBorn, photo} = req.body 
+//   const esteLibro = 
+  await Artist.findByIdAndUpdate(req.params.artistId,{
+    name : name,
+    description : description,
+    yearBorn : yearBorn,
+    photo : photo
+  })
+res.redirect("/artist/all-artists")
+
+
+} catch (error) {
+    next(error)
+}
+
+
+})
+
+router.post("/:artistId/delete", async(req,res,next)=>{
+    try{
+        await Artist.findByIdAndDelete(req.params.artistId)
+        res.redirect("/artist/all-artists")
+    }catch(error){
+        next(error)
+    }
 })
 
 
