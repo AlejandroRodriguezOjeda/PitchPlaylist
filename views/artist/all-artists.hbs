@@ -1,7 +1,7 @@
 <div>
 <h2>All artists in PitchPlaylist:</h2>
 {{#each allArtists}}
-<li>{{this.name}}
-</li>
+<a href="/artist/{{this._id}}/info"><li>{{this.name}}
+</li></a>
 {{/each}}
 </div>
