@@ -14,3 +14,8 @@ function isAdmin (req,res,next){
 
     }
 }
+
+module.exports = {
+    isLoggedIn: isLoggedIn,
+    isAdmin: isAdmin
+  }
