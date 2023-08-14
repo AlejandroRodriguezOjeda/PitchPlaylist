@@ -22,7 +22,7 @@ const userRouter = require ("./user.routes.js")
 router.use("/user", userRouter)
 
 const artistRouter = require ("./artist.routes.js")
-router.use("/", artistRouter)
+router.use("/artist", artistRouter)
 
 
 module.exports = router;
