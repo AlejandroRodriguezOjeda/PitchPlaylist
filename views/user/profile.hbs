@@ -1,8 +1,16 @@
 <div>
-<img src="" alt="profile-photo">
+<img src="{{user.photoUrl}}" alt="profile-photo" width="100px">
+<h3>Update your photo</h3>
+
+<form action="user/upload-profile-pic" method="post" enctype="multipart/form-data">
+<label for="photoUrl">Your photo</label>
+<input type="file" name="photoUrl">
+<button>Use this photo</button>
+</form>
 
 <h2>Your username: {{user.username}} </h2>
 <h2>Your email: {{user.email}} </h2>
+
 
 {{!-- <h2>Your collections:</h2>
 <li>

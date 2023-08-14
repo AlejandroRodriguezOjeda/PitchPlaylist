@@ -22,6 +22,25 @@ router.get ("/all-artists", async (req,res,next) => {
 })
 
 //GET "/:artistId" to see one artist´s details
+router.get ("/:artistId/info", async(req,res,next)=>{
+try {
+    const {artistId}  =  req.params;
+    console.log ("artistId", req.params)
+
+    await Artist.findById(artistId)
+    .select ({name: 1})
+    res.render ("artist/artist-info.hbs", {
+        oneArtist: artistId
+        // yearBorn,
+        // description
+    })
+    
+} catch (error) {
+    next (error)
+    
+}
+
+})
 
 // GET "/new-artist" to create a new artist
 router.get ("/new-artist", async (req, res, next) =>{

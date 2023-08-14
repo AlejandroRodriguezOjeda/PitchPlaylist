@@ -23,6 +23,18 @@ router.get("/", isLoggedIn, (req,res,next)=>{
     })
 })
 
+router.post ("/upload-profile-pic", uploader.single("photoUrl"), (req, res, next) => {
+User.findByIdAndUpdate(req.session.user._id,{
+    photoUrl: req.file.path
+}) 
+.then (()=>{
+    res.redirect ("/user")
+} )
+.catch ((error) => {
+    next (error)
+})
+})
+
 
 
 
