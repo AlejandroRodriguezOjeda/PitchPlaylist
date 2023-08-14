@@ -16,7 +16,7 @@ const artistSchema = new Schema(
     },
     photo:{
         type: String,
-        required: true
+        // required: true
     },
 }
 
