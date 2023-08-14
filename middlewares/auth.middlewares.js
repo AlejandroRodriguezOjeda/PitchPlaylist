@@ -15,7 +15,23 @@ function isAdmin (req,res,next){
     }
 }
 
+
+function updateLocals(req, res, next) {
+
+    if (req.session.user === undefined) {
+ 
+      res.locals.isUserActive = false;
+    } else {
+      
+      res.locals.isUserActive = true;
+    }
+  
+    next() 
+  }
+  
+
 module.exports = {
     isLoggedIn: isLoggedIn,
-    isAdmin: isAdmin
+    isAdmin: isAdmin,
+    updateLocals : updateLocals
   }

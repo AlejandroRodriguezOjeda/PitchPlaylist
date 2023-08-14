@@ -16,7 +16,9 @@
          <a href="/auth/logout">Log out</a>
          <a href="/all-collections">All collections</a>
          <a href="/">My collections</a>
-         <a href="/userId">My profile</a>
+         {{!-- {{#each user}} --}}
+         <a href="/user/{{user._id}}">My profile</a>
+         {{!-- {{/each}} --}}
 
 
       </nav>
