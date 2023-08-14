@@ -70,7 +70,7 @@ router.get("/:artistId/update", async (req,res,next)=>{
     try{
 
         const response = await Artist.findById(req.params.artistId)
-        console.log(response);
+        console.log("response get update", response);
 
 res.render("admin/edit-artist.hbs",{
     oneArtist: response,
@@ -81,26 +81,25 @@ next(error)
     }
 })
 
-router.post("/:artistId/update", async (req,res,next)=>{
+router.post("/:artistId/update", uploader.single("photo"), async (req,res,next)=>{
 
 try {
-    
-  const {name, description, yearBorn, photo} = req.body 
-//   const esteLibro = 
+    const { name, yearBorn, description, photo} = req.body
+    console.log ("req.body en post update", req.body)
+
+  const esteLibro = 
   await Artist.findByIdAndUpdate(req.params.artistId,{
-    name : name,
-    description : description,
+    name : name, 
     yearBorn : yearBorn,
-    photo : photo
+    description : description,
+    photo : req.file.path
   })
 res.redirect("/artist/all-artists")
-
+console.log ("updated artist", esteLibro)
 
 } catch (error) {
     next(error)
 }
-
-
 })
 
 router.post("/:artistId/delete", async(req,res,next)=>{

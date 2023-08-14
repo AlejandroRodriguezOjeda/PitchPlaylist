@@ -4,16 +4,16 @@
 <form action="/artist/{{this.oneArtist._id}}/update" method="post" enctype="multipart/form-data">
 
     <label for="name">Name:</label>
-    <input type="text" name="name" value="{{this.oneArtist.name}}">
+    <input type="text" name="name" value="{{this.oneArtist.name}}"/>
     <br>
     <label for="yearBorn">Born in: </label>
-    <input type="text" name="yearBorn" value="{{this.oneArtist.yearBorn}}">
+    <input type="text" name="yearBorn" value="{{this.oneArtist.yearBorn}}"/>
     <br>
     <label for="description">Short description: </label>
-    <input type="text" name="description" value="{{this.oneArtist.description}}">
+    <input type="text" name="description" value="{{this.oneArtist.description}}"/>
     <br>
   <label for="photo">Photo: </label>
-    <input type="file" name="photo" value="{{this.oneArtist.photo}}">
+    <input type="file" name="photo" />
     
     {{!-- <form action="">
     <label for="photo">Photo: </label>
@@ -22,9 +22,9 @@
     </form> --}}
     <br>
 
-    <img src="{{oneArtist.photo}}" alt="profile-photo" width="100px">
+    <img src="{{oneArtist.photo}}" alt="profile-photo" width="100px"/>
 
-<button class="btn-edit-artist">Update this artist</button>
+<button class="btn-edit-artist"type="submit">Update this artist</button>
 </form>
 
 
