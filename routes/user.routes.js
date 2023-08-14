@@ -8,11 +8,10 @@ const uploader = require("../middlewares/cloudinary.middlewares.js")
 
 router.get("/", isLoggedIn, (req,res,next)=>{
     console.log(req.session.user);
-    const userId = req.params.userid
 
-    User.findById(userId)
+    User.findById(req.session.user._id)
     .then((response)=>{
-        console.log(response)
+
 
 
         res.render("user/profile.hbs",{
