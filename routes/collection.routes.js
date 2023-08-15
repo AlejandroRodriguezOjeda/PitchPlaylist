@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Artist = require("../models/Artist.model.js");
 const User = require("../models/User.model.js");
-const Collection = require ("../models/Collection.model.js")
+const Playlist = require ("../models/Playlist.model.js")
 
 router.get ("/new-collection", async (req,res,next) => {
     try {
@@ -21,7 +21,7 @@ router.get ("/new-collection", async (req,res,next) => {
 router.post ("/new-collection", async (req, res, next) => {
     try {
  
-         await Collection.create({
+         await Playlist.create({
             creator: req.session.user,
             title: req.body.title,
             // artist: req.session.body,
@@ -39,7 +39,8 @@ router.post ("/new-collection", async (req, res, next) => {
 
 router.get ("/my-collections", async (req, res, next) => {
     try {
-        const yourCollections = await Collection.find();
+        const userId = req.session.user._id
+        const yourCollections = await Playlist.find({creator: userId});
         res.render ("user/yourcollections.hbs", {  
         yourCollections: yourCollections
         })
@@ -52,7 +53,7 @@ router.get ("/my-collections", async (req, res, next) => {
 router.get ("/:collectionId", async (req, res, next) => {
     try {
         const collectionId = req.params.collectionId;
-        const oneCollection = await Collection.findById(collectionId)
+        const oneCollection = await Playlist.findById(collectionId)
         .populate("creator")
         console.log ("oneCollection", oneCollection._id)
         res.render ("user/onecollection.hbs", {
@@ -67,7 +68,7 @@ router.get ("/:collectionId", async (req, res, next) => {
 
 router.post("/:collectionId/delete", async(req,res,next)=>{
     try{
-        await Collection.findByIdAndDelete(req.params.collectionId)
+        await Playlist.findByIdAndDelete(req.params.collectionId)
         console.log("collection id", req.params.collectionId)
         res.redirect("/collection/my-collections")
     }catch(error){
