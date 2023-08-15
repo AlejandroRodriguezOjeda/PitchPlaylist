@@ -51,6 +51,7 @@ router.post ("/new-artist",uploader.single("photo"), async (req, res, next) =>{
     try {
         
      console.log ("body new artist", req.body)
+     
     Artist.create ({
         name: req.body.name,
         yearBorn: req.body.yearBorn,
@@ -92,7 +93,7 @@ try {
     name : name, 
     yearBorn : yearBorn,
     description : description,
-    photo : req.file.path
+    photo : photo
   })
 res.redirect("/artist/all-artists")
 console.log ("updated artist", esteLibro)
@@ -101,6 +102,29 @@ console.log ("updated artist", esteLibro)
     next(error)
 }
 })
+
+// router.post("/:artistId/update", (req,res,next)=>{
+
+//         const { name, yearBorn, description, photo } = req.body
+//         console.log ("req.body en post update", req.body)
+    
+//       Artist.findByIdAndUpdate(req.params.artistId,{
+//         name : name, 
+//         yearBorn : yearBorn,
+//         description : description,
+//         photo : photo
+//       })
+//       .then( () => { 
+//     res.redirect("/artist/all-artists")
+//     console.log ("updated artist")
+    
+//     } ) 
+//     .catch ((error) => {
+//         next(error)
+//     })
+    
+    
+//     })
 
 router.post("/:artistId/delete", async(req,res,next)=>{
     try{
