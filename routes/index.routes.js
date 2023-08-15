@@ -24,5 +24,8 @@ router.use("/user", userRouter)
 const artistRouter = require ("./artist.routes.js")
 router.use("/artist", artistRouter)
 
+const collectionRouter = require ("./collection.routes.js")
+router.use("/collection", collectionRouter)
+
 
 module.exports = router;
