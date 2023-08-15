@@ -1,7 +1,8 @@
 <div>
 
-<h2>Title: </h2>
-<h3>Created by: </h3>
+<h2>Title: {{oneCollection.title}}</h2>
+
+<h3>Created by: {{oneCollection.creator.username}} </h3>
 </div>
 <li>
 
@@ -15,7 +16,8 @@
 <br>
 <a href=""><button class="btn-edit-collection">Edit your collection</button></a>
 <br>
-<a href=""></a><button class="btn-delete-collection">Delete your collection</button>
+<form action="/collection/{{oneCollection._id}}/delete" method="post">
+<button class="btn-delete" type="submit">Delete this collection</button>
 
 
 </div>

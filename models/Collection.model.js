@@ -9,12 +9,12 @@ const collectionSchema = new Schema(
         },
         title:{
             type: String,
-            required: true
+            // required: true
         },
-        artist:[{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Artist",
-        }],
+        // artist:[{
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     ref: "Artist",
+        // }],
         info: String
         
     }

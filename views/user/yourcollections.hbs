@@ -1,9 +1,9 @@
 <div>
 <h2>Your collections: </h2>
+{{#each yourCollections}}
+<a href="/collection/{{this._id}}"><li>{{this.title}}</li></a>
+    {{/each}}
 
-<li>
-    
-</li>
 
 
 </div>
