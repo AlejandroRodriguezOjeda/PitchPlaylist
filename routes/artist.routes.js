@@ -56,21 +56,21 @@ router.post ("/new-artist",uploader.single("photo"), async (req, res, next) =>{
     try {
         
      console.log ("body new artist", req.body)
-    Artist.create ({
+    if (typeof(req.body.photo) !== undefined) {  
+        await Artist.create ({
         name: req.body.name,
         yearBorn: req.body.yearBorn,
         description: req.body.description,
-        photo : req.file.path
+        photo: req.file.path
     })
     res.redirect("/artist/all-artists")
-
-    //  }else {
-    //     await Artist.create ({
-    //         name: req.body.name,
-    //         yearBorn: req.body.yearBorn,
-    //         description: req.body.description,
-    //         photo : ''
-    //      })}
+}  else {
+        await Artist.create ({
+            name: req.body.name,
+            yearBorn: req.body.yearBorn,
+            description: req.body.description,
+            photo : undefined
+         })}
    
 } catch (error) {
         next (error)
