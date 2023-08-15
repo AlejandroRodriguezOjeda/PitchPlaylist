@@ -78,7 +78,7 @@ router.post("/:collectionId/delete", async(req,res,next)=>{
 
 router.post("/:collectionId/update", async(req,res,next)=>{
     try {
-       const playlistUpdated = await Playlist.findByIdAndUpdate(req.params.collectionId)
+       const playlistUpdated = await Playlist.findByIdAndUpdate(req.params.collectionId,{artist:artist.push()})
         console.log("collection update", playlistUpdated)
         res.redirect("/collection/my-collections");
     } catch (error) {
