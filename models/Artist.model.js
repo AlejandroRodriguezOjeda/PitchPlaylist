@@ -8,11 +8,11 @@ const artistSchema = new Schema(
     },
     yearBorn:{
         type: Number,
-        required: true
+        // required: true
     },
     description:{
         type: String,
-        required: true
+        // required: true
     },
     photo:{
         type: String,

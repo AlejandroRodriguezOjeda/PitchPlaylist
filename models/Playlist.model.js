@@ -1,7 +1,7 @@
 const { Schema, model, default: mongoose } = require("mongoose");
 
 
-const collectionSchema = new Schema(
+const playlistSchema = new Schema(
     {
         creator:{
             type: mongoose.Schema.Types.ObjectId,
@@ -11,10 +11,10 @@ const collectionSchema = new Schema(
             type: String,
             // required: true
         },
-        // artist:[{
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: "Artist",
-        // }],
+        artist:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Artist",
+        }],
         info: String
         
     }
@@ -22,6 +22,6 @@ const collectionSchema = new Schema(
 
 
 
-const Collection = model("Collection", collectionSchema);
+const Playlist = model("Playlist", playlistSchema);
 
-module.exports = Collection
+module.exports = Playlist
