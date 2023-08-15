@@ -12,16 +12,14 @@ const uploader = require("../middlewares/cloudinary.middlewares.js");
 
 router.get ("/all-artists", async (req,res,next) => {
     try{ 
-    const allArtists = await Artist.find().select({name:1})
+    const allArtists = await Artist.find().select({name:1});
     
     // .select({photo:1, name:1})
-    
-    const yourPlaylist = await Playlist.find({creator: req.session.user._id })
-
     console.log ("all artists:", allArtists)
+    
     res.render ("artist/all-artists.hbs", {
         allArtists: allArtists,
-        yourPlaylist : yourPlaylist
+       
     })
    } catch (error) {
     next (error)
@@ -33,11 +31,14 @@ router.get ("/:artistId/info", async(req,res,next)=>{
 try {
     const {artistId}  =  req.params;
     console.log ("artistId", req.params)
-
+    const yourPlaylist = await Playlist.find({creator: req.session.user._id })
+    .populate("_id")
     const oneArtist=
     await Artist.findById(artistId)
+    // console.log("aqui la playlist", yourPlaylist);
     res.render ("artist/artist-info.hbs", {
-        oneArtist: oneArtist
+        oneArtist: oneArtist,
+        yourPlaylist : yourPlaylist
     })
     
 } catch (error) {
