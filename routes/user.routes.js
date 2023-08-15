@@ -7,13 +7,10 @@ const {isLoggedIn, isAdmin} =require("../middlewares/auth.middlewares")
 const uploader = require("../middlewares/cloudinary.middlewares.js")
 
 router.get("/", isLoggedIn, (req,res,next)=>{
-    console.log(req.session.user);
+    // console.log(req.session.user);
 
     User.findById(req.session.user._id)
     .then((response)=>{
-
-
-
         res.render("user/profile.hbs",{
             user:response
         })
