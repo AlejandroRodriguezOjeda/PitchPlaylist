@@ -84,10 +84,11 @@ next(error)
 router.post("/:artistId/update", async (req,res,next)=>{
 
 try {
-    
+    const artistId = req.params.artistId;
   const {name, description, yearBorn, photo} = req.body 
 //   const esteLibro = 
-  await Artist.findByIdAndUpdate(req.params.artistId,{
+  
+  await Artist.findByIdAndUpdate(artistId,{
     name : name,
     description : description,
     yearBorn : yearBorn,
