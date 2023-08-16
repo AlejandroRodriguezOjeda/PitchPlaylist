@@ -64,8 +64,8 @@ router.get("/:collectionId", async (req, res, next) => {
     const oneCollection = await Playlist.findById(collectionId).populate(
       "creator"
     );
-    const allArtists = await Playlist.findById(collectionId).select({artist:1});
-    const cloneAllArtists = JSON.parse(JSON.stringify(allArtists))
+    const allArtists = await Playlist.findById(collectionId).populate("artist");
+    const cloneAllArtists = JSON.parse(JSON.stringify(allArtists.artist))
 
     console.log("allartists", allArtists);
     console.log("clone allartists", cloneAllArtists);
@@ -88,11 +88,46 @@ router.post("/:collectionId/delete", async (req, res, next) => {
   }
 });
 
+
+router.get("/:collectionId/update", async (req,res,next)=>{
+    try {
+        const {collectionId} = req.params
+        const onePlaylist = await Playlist.findByIdAndUpdate(collectionId).populate("creator")
+
+        const allArtists = await Playlist.findById(collectionId).populate("artist");
+        const cloneAllArtists = JSON.parse(JSON.stringify(allArtists.artist))
+        res.render("collection/edit-collection.hbs",{
+            onePlaylist: onePlaylist,
+            allArtists : cloneAllArtists,
+        })
+    } catch (error) {
+        next(error)
+    }
+    
+})
+
+
+router.post("/:collectionId/update", async (req,res,next) =>{
+    try {
+        const {creator, title, artist, info} = req.body
+        const onePlaylist = await Playlist.findByIdAndUpdate(req.params.collectionId,{
+            creator: creator,
+            title : title,
+            artist : artist,
+            info : info,
+           
+        })
+        res.redirect(`/collection/${onePlaylist._id}`)
+        console.log("One playlist update", onePlaylist);
+    } catch (error) {
+        next(error)
+    }
+})
+
 // router.post("/:collectionId/update", async (req, res, next) => {
 //   try {
 //     const playlistUpdated = await Playlist.findByIdAndUpdate(
-//       req.params.collectionId,
-//       { $push {  artist: } }
+      
 //     );
 //     console.log("collection update", playlistUpdated);
 //     res.redirect("/collection/my-collections");

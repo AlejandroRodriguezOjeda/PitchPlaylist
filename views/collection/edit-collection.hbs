@@ -1,18 +1,19 @@
 <div>
 <h2>Edit your collection:</h2>
 
-<form action="">
+<form action="/collection/{{onePlaylist._id}}/update" method="post">
 
 {{!-- ? coger el id del usuario --}}
-<label for="creator">Created by: </label> 
-<input type="text" name="creator" id="">
+<label for="creator">Created by:{{onePlaylist.creator.username}} </label> 
 
-<label for="title">Title:</label>
-<input type="text" name="title" id="">
 
-<label for="artist">Artists:</label>
+<label for="title">Title:{{onePlaylist.title}}</label>
+<input type="text" name="title" value="{{onePlaylist.title}}">
+
+{{#each allArtists}}
+<label for="artist">Artists:{{this.name._id}}</label>
 <input type="text" name="artist">
-
+{{/each}}
 
 <a href=""><button class="btn-edit-collection">Edit your collection</button></a>
 </form>
