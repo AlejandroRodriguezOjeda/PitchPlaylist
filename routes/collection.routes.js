@@ -64,11 +64,16 @@ router.get("/:collectionId", async (req, res, next) => {
     const oneCollection = await Playlist.findById(collectionId).populate(
       "creator"
     );
-    const allArtists = await Playlist.findById(collectionId).select({artist:1});
-    const cloneAllArtists = JSON.parse(JSON.stringify(allArtists))
+    const allArtists = await Playlist.findById(collectionId).populate(
+        "artist"
+      );
+    // const allArtists = await Playlist.findById(collectionId).select({artist:1});
+    const cloneAllArtists = JSON.parse(JSON.stringify(allArtists.artist))
 
     console.log("allartists", allArtists);
     console.log("clone allartists", cloneAllArtists);
+
+    console.log("name", cloneAllArtists.name)
     res.render("user/onecollection.hbs", {
       oneCollection: oneCollection,
       allArtists: cloneAllArtists

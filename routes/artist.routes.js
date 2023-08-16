@@ -159,6 +159,7 @@ console.log ("updated artist", esteLibro)
 router.post("/:artistId/delete", async(req,res,next)=>{
     try{
         await Artist.findByIdAndDelete(req.params.artistId)
+        console.log("delete")
         res.redirect("/artist/all-artists")
     }catch(error){
         next(error)
