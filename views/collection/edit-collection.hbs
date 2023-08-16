@@ -5,18 +5,28 @@
 
 {{!-- ? coger el id del usuario --}}
 <label for="creator">Created by:{{onePlaylist.creator.username}} </label> 
+<br>
 
-
-<label for="title">Title:{{onePlaylist.title}}</label>
+<label for="title">Title:</label>
 <input type="text" name="title" value="{{onePlaylist.title}}">
-
-{{#each allArtists}}
-<label for="artist">Artists:{{this.name._id}}</label>
-<input type="text" name="artist">
-{{/each}}
+<br>
+<label for="info">About:</label>
+<input type="text" name="info" value="{{onePlaylist.info}}">
+<br>
 
 <a href=""><button class="btn-edit-collection">Edit your collection</button></a>
 </form>
+<div>
+<h3>Artists:</h3>
 
+<form action="/collection/{{onePlaylist._id}}/artist-removed-from-a-collection" method="post">
+{{#each allArtists}}
+<li><label for="artist">{{this.name}}</label>
+<button type = "submit">Remove</button>
+</li>
+{{/each}}
+</form>
+
+</div>
 
 </div>

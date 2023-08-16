@@ -7,7 +7,7 @@ function isLoggedIn ( req, res, next) {
 }
 
 function isAdmin (req,res,next){
-    if (req.session.user === "admin") {
+    if (req.session.user.role === "admin") {
         next ()
     } else {
         res.redirect ("/auth/login")

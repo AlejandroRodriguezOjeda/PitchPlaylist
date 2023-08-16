@@ -6,11 +6,12 @@ const Playlist = require("../models/Playlist.model.js")
 
 
 const uploader = require("../middlewares/cloudinary.middlewares.js");
+const {isLoggedIn, isAdmin} = require("../middlewares/auth.middlewares")
 
 
 //GET "/all-artists" para ver todos los artistas
 
-router.get ("/all-artists", async (req,res,next) => {
+router.get ("/all-artists", isLoggedIn, async (req,res,next) => {
     try{ 
     const allArtists = await Artist.find().select({name:1});
     
@@ -27,7 +28,7 @@ router.get ("/all-artists", async (req,res,next) => {
 })
 
 //GET "/artist/:artistId/info" to see one artist´s details
-router.get ("/:artistId/info", async(req,res,next)=>{
+router.get ("/:artistId/info", isLoggedIn, async(req,res,next)=>{
 try {
     const {artistId}  =  req.params;
     
@@ -46,7 +47,7 @@ try {
 }
 })
 
-router.post ("/:artistId/added-to-a-collection", async(req,res,next)=>{ //!!CAMBIADO ESTA RUTA AQUI E EN LA VISTA
+router.post ("/:artistId/added-to-a-collection", isLoggedIn, async(req,res,next)=>{
     try {
         const {artistId}  =  req.params;
         const {collection} = req.body;
@@ -65,12 +66,34 @@ router.post ("/:artistId/added-to-a-collection", async(req,res,next)=>{ //!!CAMB
     }
     })
 
+    
+router.post ("/:collectionId/artist-removed-from-a-collection", isLoggedIn, async(req,res,next)=>{  
+    
+    try {
+        const {artistId}  =  req.body;
+        const {collection} = req.params;
+      
+        const playlistUpdated = await Playlist.findByIdAndUpdate(
+            collection,
+            { $pull: { artist: artistId}}); 
+             console.log ("collection id", collection)
+             console.log("collection update", playlistUpdated);
+           
+           
+        res.redirect("/collection/my-collections");
+      console.log ("artist removed")
+        
+    } catch (error) {
+        next (error)
+    }
+    })
+
 // GET "/new-artist" to create a new artist
-router.get ("/new-artist", async (req, res, next) =>{
+router.get ("/new-artist", isLoggedIn, isAdmin, async (req, res, next) =>{
   res.render ("admin/new-artist.hbs")
 })
 
-router.post ("/new-artist",uploader.single("photo"), async (req, res, next) =>{
+router.post ("/new-artist",uploader.single("photo"), isLoggedIn, isAdmin,async (req, res, next) =>{
     try {
         
      console.log ("body new artist", req.body)
@@ -97,7 +120,7 @@ router.post ("/new-artist",uploader.single("photo"), async (req, res, next) =>{
 
 
 
-router.get("/:artistId/update", async (req,res,next)=>{
+router.get("/:artistId/update", isLoggedIn, isAdmin, async (req,res,next)=>{
     try{
 
         const response = await Artist.findById(req.params.artistId)
@@ -112,7 +135,7 @@ next(error)
     }
 })
 
-router.post("/:artistId/update", uploader.single("photo"), async (req,res,next)=>{
+router.post("/:artistId/update", uploader.single("photo"),isLoggedIn, isAdmin, async (req,res,next)=>{
 
 try {
     const { name, yearBorn, description, photo} = req.body
@@ -133,30 +156,9 @@ console.log ("updated artist", esteLibro)
 }
 })
 
-// router.post("/:artistId/update", (req,res,next)=>{
 
-//         const { name, yearBorn, description, photo } = req.body
-//         console.log ("req.body en post update", req.body)
-    
-//       Artist.findByIdAndUpdate(req.params.artistId,{
-//         name : name, 
-//         yearBorn : yearBorn,
-//         description : description,
-//         photo : photo
-//       })
-//       .then( () => { 
-//     res.redirect("/artist/all-artists")
-//     console.log ("updated artist")
-    
-//     } ) 
-//     .catch ((error) => {
-//         next(error)
-//     })
-    
-    
-//     })
 
-router.post("/:artistId/delete", async(req,res,next)=>{
+router.post("/:artistId/delete", isLoggedIn, isAdmin, async(req,res,next)=>{
     try{
         await Artist.findByIdAndDelete(req.params.artistId)
         console.log("delete")

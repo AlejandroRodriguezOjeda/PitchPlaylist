@@ -2,6 +2,8 @@ const express = require("express");
 const User = require("../models/User.model");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+
+const {isLoggedIn, isAdmin} = require("../middlewares/auth.middlewares")
 // GET /signup para un usuario nuevo para registrarse
 
 router.get("/signup", (req, res, next) => {
@@ -93,7 +95,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 // GET "/auth/logout" to close a session
-router.get("/logout", (req, res, next) => {
+router.get("/logout", isLoggedIn, (req, res, next) => {
   req.session.destroy(() => {
     res.redirect("/");
   });

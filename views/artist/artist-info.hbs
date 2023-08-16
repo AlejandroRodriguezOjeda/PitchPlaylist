@@ -22,10 +22,10 @@
 <button >Add</button>
 </form>
 <br>
-
+{{#if isAdmin}}
 <form action="/artist/{{this.oneArtist._id}}/delete" method="post">
 <button class="btn-delete" type="submit">Delete</button>
 </form>
  <a href="/artist/{{this.oneArtist._id}}/update"><button>Update</button></a>
-
+{{/if}}
 </div>
