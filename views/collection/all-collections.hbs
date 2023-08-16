@@ -1,8 +1,7 @@
 <div>
 <h2>All collections in PitchPlaylist:</h2>
-<li>
-
-    
-</li>
+{{#each allPlaylists}}
+<a href="/collection/{{this._id}}"><li>{{this.title}}</li></a>
+{{/each}}
 
 </div>

@@ -8,24 +8,22 @@
 {{!-- <button>Add to your favourites</button> --}}
 <br>
 
-
-
-
 <br>
 <h3>Add to one of your playlists : </h3>
-<br>
+<br> 
+
+<form action="/artist/{{oneArtist._id}}/added-to-a-collection" method="post">
  <label for="collection"></label>
- <form action="/collection/{{yourPlaylist._id}}/update" method="post">
 <select name="collection" multiple >
     {{#each yourPlaylist }}
-<option value="">{{this.title}}</option>
+<option value="{{this._id}}">{{this.title}}</option>
 {{/each}}
 </select>
-<button >meep</button>
+<button >Add</button>
 </form>
+
 <form action="/artist/{{this.oneArtist._id}}/delete" method="post">
 <button class="btn-delete" type="submit">Delete</button>
  <a href="/artist/{{this.oneArtist._id}}/update"><button>Update</button></a>
 </form>
-{{log yourPlaylist.title}}
 </div>

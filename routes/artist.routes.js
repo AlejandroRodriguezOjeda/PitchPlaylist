@@ -30,7 +30,7 @@ router.get ("/all-artists", async (req,res,next) => {
 router.get ("/:artistId/info", async(req,res,next)=>{
 try {
     const {artistId}  =  req.params;
-    console.log ("artistId", req.params)
+    
     const yourPlaylist = await Playlist.find({creator: req.session.user._id })
     .populate("_id")
     const oneArtist=
@@ -40,13 +40,30 @@ try {
         oneArtist: oneArtist,
         yourPlaylist : yourPlaylist
     })
-    
+
 } catch (error) {
     next (error)
-    
 }
-
 })
+
+router.post ("/:artistId/added-to-a-collection", async(req,res,next)=>{ //!!CAMBIADO ESTA RUTA AQUI E EN LA VISTA
+    try {
+        const {artistId}  =  req.params;
+        const {collection} = req.body;
+        console.log ("artistId", req.params)
+        console.log ("req body", req.body)
+        const playlistUpdated = await Playlist.findByIdAndUpdate(
+            collection,
+            { $addToSet: { artist: artistId}}); 
+             console.log ("collection id", collection)
+             console.log("collection update", playlistUpdated);
+           
+        res.redirect("/collection/my-collections");
+        
+    } catch (error) {
+        next (error)
+    }
+    })
 
 // GET "/new-artist" to create a new artist
 router.get ("/new-artist", async (req, res, next) =>{
@@ -57,7 +74,7 @@ router.post ("/new-artist",uploader.single("photo"), async (req, res, next) =>{
     try {
         
      console.log ("body new artist", req.body)
-    if (typeof(req.body.photo) !== undefined) {  
+    // if (typeof(req.file.path) !== undefined) {  
         await Artist.create ({
         name: req.body.name,
         yearBorn: req.body.yearBorn,
@@ -65,13 +82,13 @@ router.post ("/new-artist",uploader.single("photo"), async (req, res, next) =>{
         photo: req.file.path
     })
     res.redirect("/artist/all-artists")
-}  else {
-        await Artist.create ({
-            name: req.body.name,
-            yearBorn: req.body.yearBorn,
-            description: req.body.description,
-            photo : undefined
-         })}
+// }  else {
+//         await Artist.create ({
+//             name: req.body.name,
+//             yearBorn: req.body.yearBorn,
+//             description: req.body.description,
+//             photo : undefined
+//          })}
    
 } catch (error) {
         next (error)

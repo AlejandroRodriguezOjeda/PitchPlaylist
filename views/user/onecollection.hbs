@@ -5,10 +5,9 @@
 <h3>Created by: {{oneCollection.creator.username}} </h3>
 <h4>about: {{oneCollection.info}}</h4>
 </div>
-<li>
-
-
-</li>
+{{#each allArtists}}
+<li>{{this.name}}</li>
+{{/each}}
 <div>
 
 <div>
