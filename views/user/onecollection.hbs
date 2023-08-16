@@ -7,7 +7,8 @@
 </div>
 
 {{#each allArtists}}
-<li>{{this.name}}</li>
+<a href="/artist/{{this._id}}/info"> <li>
+{{this.name}}</li> </a>
 {{/each}}
 <div>
 
@@ -15,7 +16,7 @@
     <h4>Comments</h4>
 </div>
 <br>
-<a href=""><button class="btn-edit-collection">Edit your collection</button></a>
+<a href="/collection/{{oneCollection._id}}/update"><button class="btn-edit-collection">Edit your collection</button></a>
 <br>
 <form action="/collection/{{oneCollection._id}}/delete" method="post">
 <button class="btn-delete" type="submit">Delete this collection</button>
