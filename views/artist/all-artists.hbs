@@ -4,14 +4,20 @@
 {{#if isAdmin}}
     <a href="/artist/new-artist"> <button type="button" class="btn btn-dark">Create a new artist</button></a>  
 </div>
-<div>
+
       {{/if}}
+   <br>   
+
+    <div class="artist-container">
+  <div class="artist-card">    
 
 {{#each allArtists}}
-<a href="/artist/{{this._id}}/info"><li>{{this.name}}
-</li></a>
+ <img src="{{this.photo}}" alt="artist photo" width="200px">
+<a href="/artist/{{this._id}}/info"><h6>{{this.name}}</h6></a>
+   
+
 {{/each}}
 </div>
  
- 
+ </div>
 

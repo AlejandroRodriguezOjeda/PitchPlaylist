@@ -11,7 +11,7 @@ const { isLoggedIn, isAdmin } = require("../middlewares/auth.middlewares");
 
 router.get("/all-artists", isLoggedIn, async (req, res, next) => {
   try {
-    const allArtists = await Artist.find().select({ name: 1 });
+    const allArtists = await Artist.find().select({ name: 1 , photo: 1});
 
     console.log("all artists:", allArtists);
 

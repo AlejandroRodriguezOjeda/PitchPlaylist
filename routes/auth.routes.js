@@ -46,7 +46,7 @@ router.post("/signup", async (req, res, next) => {
       email: email,
       password: passwordHash,
     });
-    res.redirect("/"); // CAMBIAR ESTE REDIRECT A LA HOME PAGE
+    res.redirect("/auth/login"); // CAMBIAR ESTE REDIRECT A LA HOME PAGE
   } catch (error) {
     next(error);
   }
