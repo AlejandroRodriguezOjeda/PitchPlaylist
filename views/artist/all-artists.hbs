@@ -8,34 +8,18 @@
       {{/if}}
    <br>   
 
- <div class="artist-container">
-  
-       
-      {{#each allArtists}}
-       <div class="artist-card"> 
-          <img src="{{this.photo}}" alt="artist photo" width="200px">
-          <a href="/artist/{{this._id}}/info" >
-            <h6>{{this.name}}</h6></a>
-           
-          
-        </div>
-      {{/each}}
-    </div>
-  </div>
-</div>
 
-
-
-    {{!-- <div class="artist-container">
-  <div class="artist-card">    
+  <div class="card-container">
 
 {{#each allArtists}}
- <img src="{{this.photo}}" alt="artist photo" width="200px">
-<a href="/artist/{{this._id}}/info"><h6>{{this.name}}</h6></a>
-   
-
-{{/each}}
+<div class="card" style="width: 18rem;">
+  <img src="{{this.photo}}" class="card-img-top"alt="photo" height="200px" style=" object-fit:cover" >
+  <div class="card-body">
+    <h5 class="card-title">{{this.name}}</h5>
+    <a href="/artist/{{this._id}}/info" class="btn btn-primary">More</a>
+  </div>
 </div>
- 
- </div> --}}
+<br>
+   {{/each}}
 
+</div>
