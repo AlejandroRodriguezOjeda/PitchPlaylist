@@ -17,6 +17,7 @@ router.get ("/all-artists", isLoggedIn, async (req,res,next) => {
     
     // .select({photo:1, name:1})
     console.log ("all artists:", allArtists)
+    console.log(res.locals);
     
     res.render ("artist/all-artists.hbs", {
         allArtists: allArtists,
