@@ -16,17 +16,19 @@
 
 <a href=""><button class="btn-edit-collection">Edit your collection</button></a>
 </form>
-<div>
+
 <h3>Artists:</h3>
 
-<form action="/collection/{{onePlaylist._id}}/artist-removed-from-a-collection" method="post">
 {{#each allArtists}}
+
+<form action="/collection/{{../onePlaylist._id}}/removed-from-a-collection/{{this._id}}" method="post">
+
 <li><label for="artist">{{this.name}}</label>
 <button type = "submit">Remove</button>
 </li>
-{{/each}}
 </form>
+{{/each}}
+
 
 </div>
 
-</div>

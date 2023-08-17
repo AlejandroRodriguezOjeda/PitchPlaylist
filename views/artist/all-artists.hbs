@@ -1,15 +1,17 @@
-<div>{{#if isAdmin}}
-    <a href="/artist/new-artist"> <button>Create a new artist</button></a>
-</div>
 
-{{else}}
 <div>
-<h2>All artists in PitchPlaylist:</h2>
+<h2>All artists in PitchPlaylist:</h2>  
+{{#if isAdmin}}
+    <a href="/artist/new-artist"> <button>Create a new artist</button></a>  
+</div>
+<div>
+      {{/if}}
+
 {{#each allArtists}}
 <a href="/artist/{{this._id}}/info"><li>{{this.name}}
 </li></a>
 {{/each}}
 </div>
-
-{{/if}}
+ 
+ 
 

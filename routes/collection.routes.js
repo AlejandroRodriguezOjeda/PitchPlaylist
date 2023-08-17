@@ -60,7 +60,8 @@ router.get("/all-collections", isLoggedIn, async (req, res, next) => {
       next(error);
     }
   });
-
+  
+  
 router.get("/:collectionId", isLoggedIn, async (req, res, next) => {
     console.log (req.params)
   try {
@@ -84,15 +85,6 @@ router.get("/:collectionId", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post("/:collectionId/delete", isLoggedIn, async (req, res, next) => {
-  try {
-    await Playlist.findByIdAndDelete(req.params.collectionId);
-    console.log("collection id", req.params.collectionId);
-    res.redirect("/collection/my-collections");
-  } catch (error) {
-    next(error);
-  }
-});
 
 
 router.get("/:collectionId/update", isLoggedIn, async (req,res,next)=>{
@@ -113,6 +105,7 @@ router.get("/:collectionId/update", isLoggedIn, async (req,res,next)=>{
 })
 
 
+
 router.post("/:collectionId/update", isLoggedIn, async (req,res,next) =>{
     try {
         const {creator, title, artist, info} = req.body
@@ -129,6 +122,38 @@ router.post("/:collectionId/update", isLoggedIn, async (req,res,next) =>{
     }
 })
 
+router.post ("/:collectionId/removed-from-a-collection/:artistId", isLoggedIn, async(req,res,next)=>{  
+    
+  try { 
+      const {collectionId} = req.params;
+      const {artistId}  =  req.params;
+     
+      console.log("artist ID en post removed", artistId)
+      console.log("collection ID en post removed", collectionId)
+    
+      const playlistUpdated = await Playlist.findByIdAndUpdate(
+          collectionId,
+          { $pull: { artist: artistId}}); 
+       
+           console.log("collection update", playlistUpdated);
+     
+      res.redirect(`/collection/${collectionId}`);
+
+  } catch (error) {
+      next (error)
+  }
+  })
+
+
+router.post("/:collectionId/delete", isLoggedIn, async (req, res, next) => {
+  try {
+    await Playlist.findByIdAndDelete(req.params.collectionId);
+    console.log("collection id", req.params.collectionId);
+    res.redirect("/collection/my-collections");
+  } catch (error) {
+    next(error);
+  }
+});
 
 
 
