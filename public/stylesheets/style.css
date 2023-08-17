@@ -12,18 +12,19 @@ h1 {
   color: 15px;
 }
 
-.artist-container{
+.card-container{
   display: flex;
+  
   justify-content: flex-start;
   flex-wrap: wrap;
 }
 
-.artist-card{
+.card-body{
   margin: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} 
 
 
 

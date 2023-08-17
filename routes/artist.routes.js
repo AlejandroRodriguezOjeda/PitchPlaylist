@@ -11,7 +11,7 @@ const { isLoggedIn, isAdmin } = require("../middlewares/auth.middlewares");
 
 router.get("/all-artists", isLoggedIn, async (req, res, next) => {
   try {
-    const allArtists = await Artist.find().select({ name: 1 , photo: 1});
+    const allArtists = await Artist.find().select({ name: 1, photo: 1 });
 
     console.log("all artists:", allArtists);
 
@@ -53,7 +53,7 @@ router.post(
       const playlistUpdated = await Playlist.findByIdAndUpdate(collection, {
         $addToSet: { artist: artistId },
       });
-  
+
       console.log("collection update", playlistUpdated);
 
       res.redirect("/collection/my-collections");
@@ -76,23 +76,20 @@ router.post(
   async (req, res, next) => {
     try {
       console.log("body new artist", req.body);
-      
-  
 
-      await Artist.create({
-        name: req.body.name,
-        yearBorn: req.body.yearBorn,
-        description: req.body.description,
-        photo: req.file.path,
-      });
+      if (req.body.photo === undefined) {
+        res.render("admin/new-artist", {
+          errorMessage: "Please add a photo",
+        });
 
-       if (req.file.path === undefined) {
-        res.redirect ("/artist/new-artist", {
-          errorMessage: "Please add a photo" 
-        })
+        await Artist.create({
+          name: req.body.name,
+          yearBorn: req.body.yearBorn,
+          description: req.body.description,
+          photo: req.file.path,
+        });
+        res.redirect("/artist/all-artists");
       }
-
-      res.redirect("/artist/all-artists");
     } catch (error) {
       next(error);
     }
@@ -122,12 +119,16 @@ router.post(
       const { name, yearBorn, description } = req.body;
       console.log("req.body en post update", req.body);
 
-      const esteLibro = await Artist.findByIdAndUpdate(req.params.artistId, {
-        name: name,
-        yearBorn: yearBorn,
-        description: description,
-        photo: req.file.path,
-      },{new:true});
+      const esteLibro = await Artist.findByIdAndUpdate(
+        req.params.artistId,
+        {
+          name: name,
+          yearBorn: yearBorn,
+          description: description,
+          photo: req.file.path,
+        },
+        { new: true }
+      );
       res.redirect("/artist/all-artists");
       console.log("updated artist", esteLibro);
     } catch (error) {
