@@ -8,7 +8,25 @@
       {{/if}}
    <br>   
 
-    <div class="artist-container">
+ <div class="artist-container">
+  
+       
+      {{#each allArtists}}
+       <div class="artist-card"> 
+          <img src="{{this.photo}}" alt="artist photo" width="200px">
+          <a href="/artist/{{this._id}}/info" >
+            <h6>{{this.name}}</h6></a>
+           
+          
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+
+
+    {{!-- <div class="artist-container">
   <div class="artist-card">    
 
 {{#each allArtists}}
@@ -19,5 +37,5 @@
 {{/each}}
 </div>
  
- </div>
+ </div> --}}
 

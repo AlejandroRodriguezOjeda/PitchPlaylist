@@ -1,9 +1,11 @@
 <div>
 <h2>Your Playlists: </h2>
+<br>
 {{#each yourCollections}}
-<a href="/collection/{{this._id}}"><li>{{this.title}}</li></a>
+<div class="list-group">
+<a href="/collection/{{this._id}}" class="list-group-item list-group-item-action"><li>{{this.title}}</li></a>
     {{/each}}
-
+</div>
 
 
 </div>
