@@ -1,19 +1,20 @@
-<div>
+<div class="p-3 mb-2 bg-info text-white">
 <h2>Edit an artist</h2>
 
 <form action="/artist/{{this.oneArtist._id}}/update" method="post" enctype="multipart/form-data">
-
+<div class="form-group">
     <label for="name">Name:</label>
-    <input type="text" name="name" value="{{this.oneArtist.name}}"/>
+    <input type="text" class="form-control" name="name" value="{{this.oneArtist.name}}"/>
     <br>
     <label for="yearBorn">Born in: </label>
-    <input type="text" name="yearBorn" value="{{this.oneArtist.yearBorn}}"/>
+    <input type="text" class="form-control" name="yearBorn" value="{{this.oneArtist.yearBorn}}"/>
     <br>
     <label for="description">Short description: </label>
-    <input type="text" name="description" value="{{this.oneArtist.description}}"/>
+    <input type="text" class="form-control" name="description" value="{{this.oneArtist.description}}"/>
     <br>
+    </div>
   <label for="photo">Photo: </label>
-    <input type="file" name="photo" />
+    <input type="file" class="btn btn-dark" name="photo" />
     
     {{!-- <form action="">
     <label for="photo">Photo: </label>
@@ -24,7 +25,7 @@
 
     <img src="{{oneArtist.photo}}" alt="profile-photo" width="100px"/>
 
-<button class="btn-edit-artist"type="submit">Update this artist</button>
+<button class="btn btn-dark" type="submit">Update this artist</button>
 </form>
 
 

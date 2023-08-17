@@ -1,31 +1,34 @@
-<div>
+<div class="p-3 mb-2 bg-danger text-white">
  <h1>{{oneArtist.name}} </h1>  
- <img src="{{oneArtist.photo}}" alt="Artist-photo" width="100px">
+ <img src="{{oneArtist.photo}}" alt="Artist-photo" style="width: 200px; height: 200px;">
  <h3>Born in: {{oneArtist.yearBorn}} </h3> 
  <h3>Some info: {{oneArtist.description}} </h3>
  <br>
 
 {{!-- <button>Add to your favourites</button> --}}
-<br>
 
 <br>
+</div>
+<div class="p-3 mb-2 custom-card text-light">
 <h3>Add to one of your playlists : </h3>
 <br> 
 
 <form action="/artist/{{oneArtist._id}}/added-to-a-collection" method="post">
  <label for="collection"></label>
-<select name="collection" multiple >
+<select name="collection" multiple style="width: 100px;" >
     {{#each yourPlaylist }}
 <option value="{{this._id}}">{{this.title}}</option>
 {{/each}}
 </select>
-<button >Add</button>
+<button class="btn btn-dark" >Add</button>
 </form>
-<br>
+
+
 {{#if isAdmin}}
 <form action="/artist/{{this.oneArtist._id}}/delete" method="post">
-<button class="btn-delete" type="submit">Delete</button>
+<button class="btn btn-dark" type="submit" >Delete</button>
 </form>
- <a href="/artist/{{this.oneArtist._id}}/update"><button>Update</button></a>
+<br>
+ <a href="/artist/{{this.oneArtist._id}}/update"><button class="btn btn-dark">Update</button></a>
 {{/if}}
 </div>

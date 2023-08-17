@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
 }
 
 a {
@@ -25,3 +26,8 @@ h1 {
 }
 
 
+
+  .custom-card {
+    background-color: #474747; /* Replace with your desired background color */
+    /* You can also customize other styles here */
+  }

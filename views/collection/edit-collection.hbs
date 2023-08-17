@@ -1,21 +1,26 @@
-<div>
+<div class="p-3 mb-2 bg-info text-white">
 <h2>Edit your collection:</h2>
 
 <form action="/collection/{{onePlaylist._id}}/update" method="post">
 
 {{!-- ? coger el id del usuario --}}
-<label for="creator">Created by:{{onePlaylist.creator.username}} </label> 
+
+<label for="creator"><h4>Created by:{{onePlaylist.creator.username}}</h4></label> 
+{{!-- <label for="creator">Created by:{{onePlaylist.creator.username}} </label>  --}}
 <br>
 
+<div class="form-group">
 <label for="title">Title:</label>
-<input type="text" name="title" value="{{onePlaylist.title}}">
+<input type="text" class="form-control" name="title" value="{{onePlaylist.title}}">
+</div>
 <br>
+<div class="form-group">
 <label for="info">About:</label>
-<input type="text" name="info" value="{{onePlaylist.info}}">
+<input type="text" class="form-control" name="info" value="{{onePlaylist.info}}"></div>
 <br>
 
-<a href=""><button class="btn-edit-collection">Edit your collection</button></a>
-</form>
+<a href=""><button class="btn btn-dark">Edit your collection</button></a>
+<br>
 
 <h3>Artists:</h3>
 
@@ -24,11 +29,14 @@
 <form action="/collection/{{../onePlaylist._id}}/removed-from-a-collection/{{this._id}}" method="post">
 
 <li><label for="artist">{{this.name}}</label>
-<button type = "submit">Remove</button>
+<button type = "submit" class="btn btn-dark">Remove</button>
 </li>
 </form>
 {{/each}}
 
 
 </div>
+<br>
 
+
+</form>

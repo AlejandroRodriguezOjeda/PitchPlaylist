@@ -1,23 +1,26 @@
-<div>
+<div class="p-3 mb-2 bg-warning text-dark">
 <h2>Create a new collection:</h2>
 
 <form action="/collection/new-collection" method="post">
 
-<label for="creator">Created by: {{creator.username}}</label> 
+<label for="creator"><h4>Created by:{{creator.username}}</h4></label> 
 
 <br>
+<div class="form-group">
 <label for="title">Title:</label>
-<input type="text" name="title" id="">
+<input type="text" class="form-control" name="title" id="">
+</div>
 <br>
+<div class="form-group">
 <br>
 {{!-- <label for="artist">Artists:</label>
 <input type="text" name="artist" id="">
 <br> --}}
-<label for="info">A short description:</label>
-<input type="text" name="info" id="">
+<label for="info">Description:</label>
+<input type="text"  class="form-control" name="info" id="">
 <br>
-
-<button class="btn-new-collection">Create a new collection</button>
+</div>
+<button class="btn btn-dark">Create a new collection</button>
 
 </form>
 
