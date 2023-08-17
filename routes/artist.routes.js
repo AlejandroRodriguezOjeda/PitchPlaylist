@@ -76,6 +76,8 @@ router.post(
   async (req, res, next) => {
     try {
       console.log("body new artist", req.body);
+      
+  
 
       await Artist.create({
         name: req.body.name,
@@ -83,6 +85,13 @@ router.post(
         description: req.body.description,
         photo: req.file.path,
       });
+
+       if (req.file.path === undefined) {
+        res.redirect ("/artist/new-artist", {
+          errorMessage: "Please add a photo" 
+        })
+      }
+
       res.redirect("/artist/all-artists");
     } catch (error) {
       next(error);
@@ -110,14 +119,14 @@ router.post(
   isAdmin,
   async (req, res, next) => {
     try {
-      const { name, yearBorn, description, photo } = req.body;
+      const { name, yearBorn, description } = req.body;
       console.log("req.body en post update", req.body);
 
       const esteLibro = await Artist.findByIdAndUpdate(req.params.artistId, {
         name: name,
         yearBorn: yearBorn,
         description: description,
-        photo: photo,
+        photo: req.file.path,
       },{new:true});
       res.redirect("/artist/all-artists");
       console.log("updated artist", esteLibro);
