@@ -118,7 +118,7 @@ router.post(
         yearBorn: yearBorn,
         description: description,
         photo: photo,
-      });
+      },{new:true});
       res.redirect("/artist/all-artists");
       console.log("updated artist", esteLibro);
     } catch (error) {

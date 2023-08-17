@@ -1,6 +1,41 @@
 <div>
 <h1>Sign up here</h1>
 
+
+<form action="/auth/signup" method="post">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" name="username"  class="form-control"  aria-describedby="emailHelp" placeholder="Enter a username">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" name="password"   class="form-control"  placeholder="Password">
+  </div>
+   <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" name="email" class="form-control"  placeholder="Email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-primary">Sign up</button>
+
+  {{#if this.errorMessage}}
+<p>{{this.errorMessage}}</p>
+{{/if}}
+</form>
+
+
+
+
+
+
+
+
+
+
+
+{{!-- 
+
 <form action="/auth/signup" method="post">
 <label for="username">Username</label>
 <input type="text" name="username">
@@ -18,4 +53,4 @@
 {{/if}}
 </form>
 
-</div>
+</div> --}}

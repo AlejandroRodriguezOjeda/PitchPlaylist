@@ -5,16 +5,16 @@
 <h3>Created by: {{oneCollection.creator.username}} </h3>
 <h4>about: {{oneCollection.info}}</h4>
 </div>
-
+<div>
+    <h4>Artists in Playlist</h4>
+</div>
 {{#each allArtists}}
 <a href="/artist/{{this._id}}/info"> <li>
 {{this.name}}</li> </a>
 {{/each}}
 <div>
 
-<div>
-    <h4>Comments</h4>
-</div>
+
 <br>
 <a href="/collection/{{oneCollection._id}}/update"><button class="btn-edit-collection">Edit your collection</button></a>
 <br>
