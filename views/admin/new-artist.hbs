@@ -14,6 +14,10 @@
     <br>
     <label for="photo">Photo: </label>
     <input type="file" name="photo">
+    <br>
+    {{#if this.errorMessage}}
+    <h3>{{this.errorMessage}} </h3>
+    {{/if}}
 
      <button class="btn-add-artist">Add this artist</button>
     <br>
