@@ -133,7 +133,7 @@ router.post ("/:collectionId/removed-from-a-collection/:artistId", isLoggedIn, a
     
       const playlistUpdated = await Playlist.findByIdAndUpdate(
           collectionId,
-          { $pull: { artist: artistId}}); 
+          { $pull: { artist : artistId}}); 
        
            console.log("collection update", playlistUpdated);
      
