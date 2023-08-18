@@ -1,5 +1,5 @@
-
 <div class="p-3 mb-2 bg-danger text-white">
+
 <h2>All artists in PitchPlaylist:</h2>  
 {{#if isAdmin}}
     <a href="/artist/new-artist"> <button type="button" class="btn btn-dark">Create a new artist</button></a>  
@@ -15,7 +15,7 @@
 <div class="card" style="width: 18rem;">
   <img src="{{this.photo}}" class="card-img-top"alt="photo" height="300px" style=" object-fit:cover" >
   <div class="card-body">
-    <h5 class="card-title">{{this.name}}</h5>
+    <h5 class="card-title text-dark">{{this.name}}</h5>
     <a href="/artist/{{this._id}}/info" class="btn btn-primary">More</a>
   </div>
 </div>
