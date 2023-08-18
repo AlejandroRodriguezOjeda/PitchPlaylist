@@ -1,26 +1,26 @@
-<div class="p-3 mb-2 bg-secondary text-white"> 
-    <br>
-<img src="{{user.photoUrl}}" alt="profile-photo" style="width: 200px; height: 200px;">
-<h3>{{user.username}}'s profile</h3>
+<div class="p-3 mb-2 bg-secondary text-white">
+  <br />
+  <img
+    src="{{user.photoUrl}}"
+    alt="profile-photo"
+    style="width: 200px; height: 200px;"
+  />
+  <h3>{{user.username}}'s profile</h3>
 
+  <h2>Your username: {{user.username}} </h2>
+  <h2>Your email: {{user.email}} </h2>
 
-<h2>Your username: {{user.username}} </h2>
-<h2>Your email: {{user.email}} </h2>
+  <form
+    action="user/upload-profile-pic"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <label for="photoUrl"><h6>Change your profile picture:</h6></label>
+    <input type="file" name="photoUrl" class="btn btn-dark" />
+    <button class="btn btn-dark">Use this photo</button>
+    <br />
+    <br />
 
-<form action="user/upload-profile-pic" method="post" enctype="multipart/form-data">
-<label for="photoUrl"><h6>Change your profile picture:</h6></label>
-<input type="file" name="photoUrl" class="btn btn-dark"> <button class="btn btn-dark">Use this photo</button>
-<br>
-<br>
-
-</form>
-
-{{!-- <h2>Your collections:</h2>
-<li>
-    
-</li> --}}
-
-{{!-- <button class="btn-new-collection">Create a new collection</button> --}}
-
+  </form>
 
 </div>
