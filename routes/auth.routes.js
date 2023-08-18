@@ -3,17 +3,14 @@ const User = require("../models/User.model");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 
-const {isLoggedIn, isAdmin} = require("../middlewares/auth.middlewares")
+const { isLoggedIn, isAdmin } = require("../middlewares/auth.middlewares");
 // GET /signup para un usuario nuevo para registrarse
 
 router.get("/signup", (req, res, next) => {
-  console.log("signup get route");
   res.render("auth/signup.hbs");
 });
 
 router.post("/signup", async (req, res, next) => {
-//   console.log(req.body);
-
   const { username, email, password } = req.body;
 
   if (username === "" || email === "" || password === "") {
@@ -46,7 +43,7 @@ router.post("/signup", async (req, res, next) => {
       email: email,
       password: passwordHash,
     });
-    res.redirect("/auth/login"); // CAMBIAR ESTE REDIRECT A LA HOME PAGE
+    res.redirect("/auth/login");
   } catch (error) {
     next(error);
   }
@@ -64,7 +61,6 @@ router.post("/login", async (req, res, next) => {
   try {
     const userFound = await User.findOne({ username: username });
     if (userFound === null) {
-      // console.log ("userFound in psot login funciona")
       res.status(400).render("auth/login.hbs", {
         errorMessage: "Are you sure we´ve met before? Try again",
       });

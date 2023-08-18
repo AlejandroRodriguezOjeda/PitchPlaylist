@@ -5,14 +5,12 @@
 <h3>Created by: {{oneCollection.creator.username}} </h3>
 <h4>about: {{oneCollection.info}}</h4>
 
-{{!-- <div class="p-3 mb-2 bg-info text-dark"> --}}
-    <h4>Artists in Playlist</h4>
+<h4>Artists in Playlist</h4>
 
 {{#each allArtists}}
 <a href="/artist/{{this._id}}/info" class="text-white bg-dark"> <li>
 {{this.name}}</li> </a>
 {{/each}}
-{{!-- <div class="p-3 mb-2 bg-info text-dark"> --}}
 
 
 <br>
