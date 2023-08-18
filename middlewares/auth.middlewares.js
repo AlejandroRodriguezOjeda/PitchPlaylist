@@ -18,9 +18,7 @@ function updateLocals(req, res, next) {
   if (req.session.user === undefined) {
     res.locals.isUserActive = false;
     res.locals.isAdmin = false;
-  } 
-  
-  else {
+  } else {
     res.locals.isUserActive = true;
     res.locals.isAdmin = req.session.user.role === "admin";
   }

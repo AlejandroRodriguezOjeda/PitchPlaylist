@@ -13,8 +13,6 @@ router.get("/all-artists", isLoggedIn, async (req, res, next) => {
   try {
     const allArtists = await Artist.find().select({ name: 1, photo: 1 });
 
-    console.log("all artists:", allArtists);
-
     res.render("artist/all-artists.hbs", {
       allArtists: allArtists,
     });
@@ -32,7 +30,6 @@ router.get("/:artistId/info", isLoggedIn, async (req, res, next) => {
       creator: req.session.user._id,
     }).populate("_id");
     const oneArtist = await Artist.findById(artistId);
-    // console.log("aqui la playlist", yourPlaylist);
     res.render("artist/artist-info.hbs", {
       oneArtist: oneArtist,
       yourPlaylist: yourPlaylist,
@@ -54,8 +51,6 @@ router.post(
         $addToSet: { artist: artistId },
       });
 
-      console.log("collection update", playlistUpdated);
-
       res.redirect("/collection/my-collections");
     } catch (error) {
       next(error);
@@ -75,8 +70,6 @@ router.post(
   isAdmin,
   async (req, res, next) => {
     try {
-      console.log("body new artist", req.body);
-
       if (req.body.photo === undefined) {
         res.render("admin/new-artist", {
           errorMessage: "Please add a photo",
@@ -99,7 +92,6 @@ router.post(
 router.get("/:artistId/update", isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     const response = await Artist.findById(req.params.artistId);
-    console.log("response get update", response);
 
     res.render("admin/edit-artist.hbs", {
       oneArtist: response,
@@ -144,7 +136,6 @@ router.post(
   async (req, res, next) => {
     try {
       await Artist.findByIdAndDelete(req.params.artistId);
-      console.log("delete");
       res.redirect("/artist/all-artists");
     } catch (error) {
       next(error);
